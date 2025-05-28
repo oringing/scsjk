@@ -1,13 +1,12 @@
-export interface Student {
-  sno: string;     // 学号
-  sname: string;   // 姓名
-  ssex: string;    // 性别
-  sage: number;    // 年龄
-  sdept: string;  // 院系
+interface Student {
+  sno: string;
+  sname: string;
+  ssex: '男' | '女';
+  sage: number;
+  sdept: string;
 }
 
-export interface StudentQueryParams {
-  pageNum: number;
-  pageSize: number;
-  searchKey?: string;
+interface PageResult<T> {
+  records: T[];
+  total: number;
 }

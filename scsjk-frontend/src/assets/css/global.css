@@ -1,0 +1,47 @@
+/* 全局样式 */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', Arial, sans-serif;
+  background-color: #f0f2f5;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+.el-header {
+  background-color: #409eff;
+  color: white;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+.el-main {
+  padding: 20px;
+  background-color: #f0f2f5;
+}
+
+.el-card {
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.el-table {
+  margin-top: 20px;
+}
+
+.el-pagination {
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.el-dialog {
+  border-radius: 8px;
+}
+
+.el-form-item__label {
+  font-weight: bold;
+}

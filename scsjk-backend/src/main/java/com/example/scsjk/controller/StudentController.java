@@ -15,9 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/student")
-
-
-
+@CrossOrigin(origins = "*")  // 允许所有来源访问，生产环境建议替换为具体域名
 public class StudentController {
     private final StudentMapper studentMapper;
     private final StudentService studentService;
@@ -45,7 +43,16 @@ public class StudentController {
     // 根据ID查询
     @GetMapping("/{sno}")
     public Student getById(@PathVariable String sno) {
-        return studentService.selectById(sno);
+        // 添加日志确认参数
+        System.out.println("查询学号: " + sno);
+
+        Student student = studentService.selectById(sno);
+
+        if (student == null) {
+            System.out.println("未找到学号为 " + sno + " 的学生");
+        }
+
+        return student;
     }
 
     // 添加

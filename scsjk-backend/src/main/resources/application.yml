@@ -15,6 +15,10 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto
+      mybatis-plus:
+        page:
+          helper-dialect: mysql
+          row-bounds-with-count: true
   mapper-locations: classpath:mapper/**/*.xml
   type-aliases-package: com.example.scsjk.entity
   management:
