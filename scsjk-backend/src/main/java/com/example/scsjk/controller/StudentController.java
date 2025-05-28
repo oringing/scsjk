@@ -1,22 +1,27 @@
 package com.example.scsjk.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.scsjk.entity.Student;
 import com.example.scsjk.mapper.StudentMapper;
 import com.example.scsjk.service.StudentService;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/student")
 @CrossOrigin(origins = "*")  // 允许所有来源访问，生产环境建议替换为具体域名
 public class StudentController {
+    //
+    @Getter
     private final StudentMapper studentMapper;
     private final StudentService studentService;
 
@@ -26,12 +31,29 @@ public class StudentController {
         this.studentService = studentService;
     }
 
+    // 异常处理
+    @ExceptionHandler(Exception.class)
+    @ResponseBody
+    public Map<String, Object> handleException(Exception e) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("code", 500);
+        result.put("message", "服务器内部错误：" + e.getMessage());
+        e.printStackTrace();
+        return result;
+    }
+
     // 分页查询
     @GetMapping("/page")
-    public IPage<Student> getPage(@RequestParam(defaultValue = "1") Integer current,
-                                  @RequestParam(defaultValue = "10") Integer size) {
+    public Map<String, Object> getPage(@RequestParam(defaultValue = "1") Integer current,
+                                       @RequestParam(defaultValue = "10") Integer size) {
         Page<Student> page = new Page<>(current, size);
-        return studentService.selectPage(page);
+        IPage<Student> studentPage = studentService.selectPage(page);
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("records", studentPage.getRecords());
+        result.put("total", studentPage.getTotal());
+
+        return result;
     }
 
     // 查询所有
@@ -74,12 +96,9 @@ public class StudentController {
     }
 
     // 按姓名查询
-    @GetMapping("/search")
-    public List<Student> searchByName(@RequestParam String name) {
-        return studentService.searchByName(name);
+
+    public List<Student> searchByName(String name) {
+        return studentMapper.selectList(new QueryWrapper<Student>().like("sname", name));
     }
 
-    public StudentMapper getStudentMapper() {
-        return studentMapper;
-    }
 }
