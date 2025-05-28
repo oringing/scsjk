@@ -258,33 +258,53 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.course-container {
+.course-container { /* 卡片容器 */
   padding: 20px;
 }
 
-.card-header {
+.card-header {  /* 标题，按钮 */
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.search-container {
+.search-container { /*  搜索框和按钮 */
   margin-bottom: 20px;
   display: flex;
   gap: 10px;
 }
 
-.pagination-container {
+.pagination-container { /* 分页器*/
   margin-top: 20px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center; /* 使分页部分水平居中 */
 }
 
-.el-table {
+/* 分页器字体大小 */
+.el-pagination {
+  font-size: 20px; /* 根据需要调整字体大小 */
+}
+
+.el-pagination .number,
+.el-pagination .btn-prev,
+.el-pagination .btn-next,
+.el-pagination .el-pager li {
+  font-size: 16px !important; /* 确保内部元素字体大小一致 */
+}
+
+.el-pagination .el-select .el-input .el-input__inner {
+  font-size: 20px; /* 调整选择框字体大小 */
+}
+
+.el-pagination .el-input__inner {
+  font-size: 20px; /* 调整输入框字体大小 */
+}
+
+.el-table { /* 添加样式，使表格居中 */
   margin-top: 20px;
 }
 
-.el-tag {
+.el-tag { /* 添加样式，使标签居中 */
   margin: 2px;
 }
 </style>

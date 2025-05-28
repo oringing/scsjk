@@ -3,9 +3,8 @@ import request from '@/utils/request'
 // 分页查询
 export function getScPage(current, size) {
   return request({
-    url: '/sc/page',
-    method: 'get',
-    params: { current, size }
+    url: `/sc/page?current=${current}&size=${size}`,
+    method: 'get'
   })
 }
 
