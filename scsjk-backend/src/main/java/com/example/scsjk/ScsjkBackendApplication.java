@@ -7,11 +7,6 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @MapperScan("com.example.scsjk.mapper")
-//@ComponentScan(basePackages = {
-//    "com.example.scsjk.service",
-//    "com.example.scsjk.config",
-//    "com.example.scsjk.controller"  // 添加controller包
-//})
 
 public class ScsjkBackendApplication {
 

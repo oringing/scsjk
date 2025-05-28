@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# scsjk
-springboot+vue3期末课设
-=======
 # scsjk-frontend
 
 This template should help get you started developing with Vue 3 in Vite.
@@ -66,4 +62,3 @@ npm run test:e2e -- --debug
 ```sh
 npm run lint
 ```
->>>>>>> d405b8d (本地代码提交到仓库)
