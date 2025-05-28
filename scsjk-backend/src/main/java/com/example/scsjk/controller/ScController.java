@@ -1,4 +1,4 @@
-//package com.example.scsjk.controller;
-//
-//public class ScController {
-//}
+package com.example.scsjk.controller;
+
+public class ScController {
+}
