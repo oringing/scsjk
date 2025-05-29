@@ -6,7 +6,7 @@
       </div>
       <h1 class="title">学生选课管理系统</h1>
     </div>
-    <nav class="nav">
+    <nav class="nav">  
       <router-link to="/student" class="nav-item">学生列表</router-link>
       <router-link to="/course" class="nav-item">课程列表</router-link>
       <router-link to="/sc" class="nav-item">选课成绩列表</router-link>

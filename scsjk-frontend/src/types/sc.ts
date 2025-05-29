@@ -1,4 +1,4 @@
-interface Sc {
+interface Sc { 
   sno: string;
   cno: string;
   grade: number;
