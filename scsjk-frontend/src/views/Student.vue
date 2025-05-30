@@ -156,29 +156,29 @@ interface Student {
   sdept: string;
 }
 
-const currentPage = ref(1);
-const pageSize = ref(10);
-const total = ref(0);
-const studentList = ref<Student[]>([]);
-const searchType = ref('name');
-const searchValue = ref('');
-const loading = ref(false);
+const currentPage = ref(1); // 当前页
+const pageSize = ref(10); // 每页显示的条数
+const total = ref(0); // 总条数
+const studentList = ref<Student[]>([]); // 学生列表
+const searchType = ref('name');   
+const searchValue = ref(''); // 搜索值
+const loading = ref(false); // 添加/修改对话框显示状态
 
-const dialogVisible = ref(false);
-const dialogTitle = ref('');
-const isEdit = ref(false);
-const formRef = ref<FormInstance>();
-const form = ref<Student>({
+const dialogVisible = ref(false); // 添加/修改对话框显示状态
+const dialogTitle = ref(''); // 对话框标题
+const isEdit = ref(false); // 是否为编辑场景
+const formRef = ref<FormInstance>();  // 表单实例
+const form = ref<Student>({ 
   sno: '',
   sname: '',
   ssex: '男',
   sage: 20,
   sdept: ''
-});
+}); // 表单数据
 
-const rules = reactive<FormRules>({
-  sno: [{ required: true, message: '请输入学号', trigger: 'blur' }],
-  sname: [{ required: true, message: '请输入姓名', trigger: 'blur' }],
+const rules = reactive<FormRules>({  // 表单验证规则
+  sno: [{ required: true, message: '请输入学号', trigger: 'blur' }], 
+  sname: [{ required: true, message: '请输入姓名', trigger: 'blur' }], 
   ssex: [{ required: true, message: '请选择性别', trigger: 'change' }],
   sage: [{ required: true, message: '请输入年龄', trigger: 'blur' }],
   sdept: [{ required: true, message: '请输入院系', trigger: 'blur' }]
@@ -200,27 +200,28 @@ const fetchStudents = async () => {
 };
 
 // 搜索学生
-const handleSearch = async () => {
+const handleSearch = async () => { 
+  //检查搜索值是否为空：为空则显示全部学生
   if (!searchValue.value.trim()) {
     fetchStudents();
     return;
   }
   try {
-    loading.value = true;
-    let res: any;
-    if (searchType.value === 'name') {
-      res = await searchStudentByName(searchValue.value);
-    } else if (searchType.value === 'sno') {
-      res = await getStudentBySno(searchValue.value);
-      res = [res];
+    loading.value = true;//设置加载状态
+    let res: any; //定义变量res，用于接收搜索结果
+    if (searchType.value === 'name') { //如果搜索类型为姓名
+      res = await searchStudentByName(searchValue.value); //调用searchStudentByName方法
+    } else if (searchType.value === 'sno') { //如果搜索类型为学号
+      res = await getStudentBySno(searchValue.value); //调用getStudentBySno方法
+      res = [res]; //将结果转换为数组
     }
-    studentList.value = res;
-    total.value = res.length;
-  } catch (error) {
-    console.error('搜索学生失败:', error);
+    studentList.value = res; //将结果赋值给studentList变量
+    total.value = res.length; //设置总记录数
+  } catch (error) { //如果搜索失败
+    console.error('搜索学生失败:', error); //打印错误信息
     ElMessage.error('搜索学生失败');
   } finally {
-    loading.value = false;
+    loading.value = false; //结束加载状态
   }
 };
 

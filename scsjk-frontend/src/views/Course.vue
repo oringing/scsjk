@@ -127,7 +127,7 @@ const form = ref<Course>({
   ccredit: 1
 });
 
-const rules = reactive<FormRules>({
+const rules = reactive<FormRules>({ // 表单校验规则
   cno: [{ required: true, message: '请输入课程号', trigger: 'blur' }],
   cname: [{ required: true, message: '请输入课程名', trigger: 'blur' }],
   ccredit: [{ required: true, message: '请输入学分', trigger: 'blur' }]
@@ -137,8 +137,8 @@ const rules = reactive<FormRules>({
 const fetchCourses = async () => {
   try {
     loading.value = true;
-    const res = await getCoursePage(currentPage.value, pageSize.value);
-    courseList.value = res.data?.records || res.records || [];
+    const res = await getCoursePage(currentPage.value, pageSize.value); // 调用接口获取课程列表
+    courseList.value = res.data?.records || res.records || []; // 处理接口返回数据
     total.value = res.data?.total || res.total || 0;
   } catch (error) {
     console.error('获取课程数据失败:', error);
@@ -150,16 +150,17 @@ const fetchCourses = async () => {
 
 // 搜索课程
 const handleSearch = async () => {
-  if (!searchCname.value.trim()) {
-    fetchCourses();
+  if (!searchCname.value.trim()) { // 如果搜索内容为空，则重新获取所有课程数据
+    fetchCourses(); // 重新获取课程列表
     return;
   }
   try {
     loading.value = true;
-    const res = await getCourseAll();
-    const filtered = res.filter((course: Course) => course.cname.includes(searchCname.value));
-    courseList.value = filtered;
-    total.value = filtered.length;
+    const res = await getCourseAll(); // 获取所有课程数据
+    const filtered = res.filter((course: Course) => course.cname.includes(searchCname.value)); // 过滤出包含搜索内容的课程
+    courseList.value = filtered; // 更新课程列表
+    total.value = filtered.length; // 更新总条数
+ 
   } catch (error) {
     console.error('搜索课程失败:', error);
     ElMessage.error('搜索课程失败');

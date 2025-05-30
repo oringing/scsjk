@@ -141,10 +141,10 @@ interface Sc {
   grade?: number; // 允许未录入成绩
 }
 
-const currentPage = ref(1);
-const pageSize = ref(10);
-const total = ref(0);
-const scList = ref<Sc[]>([]);
+const currentPage = ref(1); // 当前页
+const pageSize = ref(10); // 每页显示的条数
+const total = ref(0); // 数据总数
+const scList = ref<Sc[]>([]); // 数据列表
 const searchSno = ref('');
 const searchCno = ref('');
 const loading = ref(false);
@@ -160,13 +160,13 @@ const form = ref<Sc>({
 });
 
 const rules = reactive<FormRules>({
-  sno: [{ required: true, message: '请输入学号', trigger: 'blur' }],
+  sno: [{ required: true, message: '请输入学号', trigger: 'blur' }], 
   cno: [{ required: true, message: '请输入课程号', trigger: 'blur' }],
   grade: [{ required: true, message: '请输入成绩', trigger: 'blur' }]
 });
 
 // 获取选课记录列表
-const fetchScs = async (params?: Record<string, any>) => {
+const fetchScs = async (params?: Record<string, any>) => { 
   try {
     loading.value = true;
     const res = await getScPage(currentPage.value, pageSize.value, params);
@@ -182,9 +182,9 @@ const fetchScs = async (params?: Record<string, any>) => {
 
 // 按学号搜索
 const handleSnoSearch = async () => {
-  if (searchSno.value.trim()) {
+  if (searchSno.value.trim()) { 
     try {
-      const res = await getScAll();
+      const res = await getScAll(); 
       const filtered = res.filter(sc => sc.sno.includes(searchSno.value));
       scList.value = filtered;
       total.value = filtered.length;
